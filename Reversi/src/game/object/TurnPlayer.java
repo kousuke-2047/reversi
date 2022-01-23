@@ -2,36 +2,39 @@ package game.object;
 
 import game.enums.PieceColor;
 import game.param.Param;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class TurnPlayer {
 	private PieceColor turnPlayer;
-	private TextField turnPlayerText;
-	private Pane turnPlayerPane;
-	private TextField labelText;
+	private Text turnPlayerText;
+	private GridPane turnPlayerPane;
+	private Text labelText;
 
 	public TurnPlayer(PieceColor pieceColor) {
-		this.turnPlayerPane = new Pane();
+		this.turnPlayerPane = new GridPane();
 		this.turnPlayer = pieceColor;
-		this.turnPlayerText = new TextField(pieceColor.toString());
-		this.labelText = new TextField();
+		this.turnPlayerText = new Text(pieceColor.toString());
+		this.labelText = new Text();
 
-		//X座標調整
+		//座標調整
 		this.turnPlayerPane.setLayoutX( (Param.getSQUARE_SIZE()*Param.getGRID_SIZE()) + Param.getREVERSI_PANE_PADDING() + Param.getDIVIDE_SIZE());
+		this.turnPlayerPane.setLayoutY(Param.getREVERSI_PANE_PADDING());
 		this.turnPlayerPane.setPrefWidth(Param.getTURNPLAYER_PANE_WIDTH());
 		this.turnPlayerPane.setPrefHeight(Param.getTURNPLAYER_PANE_HEIGHT());
 
-		this.turnPlayerText.setEditable(false);
-		this.turnPlayerText.setPrefHeight(Param.getTURNPLAYER_TEXTFIELD_HEIGHT());
-		this.turnPlayerText.setLayoutY(Param.getTURNPLAYER_TEXTFIELD_HEIGHT());
+		this.turnPlayerPane.setVgap(Param.getGRIDPANE_TEXT_PADDING());
+		this.turnPlayerPane.setHgap(Param.getGRIDPANE_TEXT_PADDING());
 
-		this.labelText.setPrefHeight(Param.getTURNPLAYER_TEXTFIELD_HEIGHT());
 		this.labelText.setText(Param.getTURNPLAYER_LABEL());
-		this.labelText.setEditable(false);
 
-		this.turnPlayerPane.getChildren().add(this.labelText);
-		this.turnPlayerPane.getChildren().add(this.turnPlayerText);
+		this.labelText.setFont(Font.font(Param.getNORMAL_FOMT_SIZE()));
+		this.turnPlayerText.setFont(Font.font(Param.getNORMAL_FOMT_SIZE()));
+
+		this.turnPlayerPane.add(labelText,0,0);
+		this.turnPlayerPane.add(turnPlayerText,1,0);
+
 
 	}
 
@@ -59,22 +62,22 @@ public class TurnPlayer {
 		this.turnPlayer = turnPlayer;
 		this.setText(turnPlayer);
 	}
-	public TextField getTurnPlayerText() {
+	public Text getTurnPlayerText() {
 		return turnPlayerText;
 	}
-	public void setTurnPlayerText(TextField turnPlayerText) {
+	public void setTurnPlayerText(Text turnPlayerText) {
 		this.turnPlayerText = turnPlayerText;
 	}
-	public Pane getTurnPlayerPane() {
+	public GridPane getTurnPlayerPane() {
 		return turnPlayerPane;
 	}
-	public void setTurnPlayerPane(Pane turnPlayerPane) {
+	public void setTurnPlayerPane(GridPane turnPlayerPane) {
 		this.turnPlayerPane = turnPlayerPane;
 	}
-	public TextField getLabelText() {
+	public Text getLabelText() {
 		return labelText;
 	}
-	public void setLabelText(TextField labelText) {
+	public void setLabelText(Text labelText) {
 		this.labelText = labelText;
 	}
 

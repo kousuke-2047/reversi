@@ -6,6 +6,7 @@ import java.util.Arrays;
 import game.enums.PieceColor;
 import game.object.Piece;
 import game.object.Score;
+import game.object.SpecialPane;
 import game.object.Square;
 import game.object.TurnPlayer;
 import game.param.Param;
@@ -22,6 +23,7 @@ public class Reversi extends Group{
 	private static int selectYGrid;
 	private TurnPlayer turnPlayer;
 	private Score Score;
+	private SpecialPane specialPane;
 
 
 	public Reversi() {
@@ -30,6 +32,7 @@ public class Reversi extends Group{
 		this.setReversiPaneConfig();
 		this.turnPlayer = new TurnPlayer(Param.getPRECEDING_COLOR());
 		this.Score = new Score();
+		this.specialPane = new SpecialPane();
 
 		//マス目作成処理
 		for(int i=0;i<Param.getGRID_SIZE();i++) {
@@ -38,6 +41,7 @@ public class Reversi extends Group{
 				this.board.get(i).add(new Square(i,j));
 			}
 		}
+		//クリックイベント付与
 		for(ArrayList<Square> sList:this.board) {
 			for(Square s:sList) {
 				s.getCanPutRectangle().setOnMouseClicked(this::mouseClicked);
@@ -48,6 +52,7 @@ public class Reversi extends Group{
 		getChildren().add(this.Score.getScorePane());
 		getChildren().add(this.turnPlayer.getTurnPlayerPane());
 		getChildren().add(this.reversiPane);
+		getChildren().add(this.specialPane.getSpecialPane());
 		this.start();
 	}
 	private void setReversiPaneConfig() {
@@ -312,5 +317,11 @@ public class Reversi extends Group{
 	}
 	public void setScore(Score score) {
 		Score = score;
+	}
+	public SpecialPane getSpecialPane() {
+		return specialPane;
+	}
+	public void setSpecialPane(SpecialPane specialPane) {
+		this.specialPane = specialPane;
 	}
 }

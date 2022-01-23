@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import game.enums.PieceColor;
+import game.enums.Special;
+import game.object.SpecialAttribute;
 import game.object.Square;
 import javafx.scene.paint.Color;
 
@@ -53,6 +55,28 @@ public class Param {
 	private static double TURNPLAYER_TEXTFIELD_HEIGHT = 25;
 	//turnPlayerパネルラベルテキスト
 	private static String TURNPLAYER_LABEL = "ターン";
+
+	//スペシャル
+	private static ArrayList<SpecialAttribute> SPECIAL_LIST = new ArrayList<SpecialAttribute>(Arrays.asList(
+			new SpecialAttribute(1,Special.Miss),
+			new SpecialAttribute(2,Special.Random_ban),
+			new SpecialAttribute(3,Special.Random_change),
+			new SpecialAttribute(4,Special.Random_break),
+			new SpecialAttribute(5,Special.Horizontal_divide),
+			new SpecialAttribute(6,Special.Vertical_divide),
+			new SpecialAttribute(7,Special.Meteor),
+			new SpecialAttribute(8,Special.Cross_divide)
+			));
+	//ランダム表のパネルサイズ
+	private static double RANDOM_GRIDPANE_WIDTH = 100;
+	//ランダムテキストのパネルサイズ
+	private static double RANDOM_TEXTPANE_WIDTH = 100;
+	//gridPaneの文字パディング
+	private static double GRIDPANE_TEXT_PADDING = 5;
+	//通常textフォントサイズ
+	private static double NORMAL_FOMT_SIZE = 15;
+	//強調textフォントサイズ
+	private static double BOLD_FONT_SIZE = 20;
 
 	public static PieceColor getPRECEDING_COLOR() {
 		return PRECEDING_COLOR;
@@ -120,4 +144,23 @@ public class Param {
 	public static double getDIVIDE_SIZE() {
 		return DIVIDE_SIZE;
 	}
+	public static ArrayList<SpecialAttribute> getSPECIAL_LIST() {
+		return SPECIAL_LIST;
+	}
+	public static double getRANDOM_GRIDPANE_WIDTH() {
+		return RANDOM_GRIDPANE_WIDTH;
+	}
+	public static double getRANDOM_TEXTPANE_WIDTH() {
+		return RANDOM_TEXTPANE_WIDTH;
+	}
+	public static double getGRIDPANE_TEXT_PADDING() {
+		return GRIDPANE_TEXT_PADDING;
+	}
+	public static double getNORMAL_FOMT_SIZE() {
+		return NORMAL_FOMT_SIZE;
+	}
+	public static double getBOLD_FONT_SIZE() {
+		return BOLD_FONT_SIZE;
+	}
+
 }
