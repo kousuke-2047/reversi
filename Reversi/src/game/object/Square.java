@@ -5,6 +5,7 @@ import game.enums.PieceColor;
 import game.param.Param;
 import game.reversi.Reversi;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Square {
@@ -16,18 +17,26 @@ public class Square {
 	private Rectangle canPutRectangle;
 	private ArrayList<ArrayList<Integer>> reversePieceList;
 
-	public Square(int xGrid,int yGrid) {
+	public Square(
+			int xGrid,
+			int yGrid,
+			double squareSize,
+			Color squareColor,
+			Color squareLineColor,
+			Color canPutSquareColor,
+			double canNotPutOpocity
+			) {
 		this.xGrid = xGrid;
 		this.yGrid = yGrid;
-		this.canPutRectangle = new Rectangle(xGrid*Param.getSQUARE_SIZE(),yGrid*Param.getSQUARE_SIZE(),Param.getSQUARE_SIZE(),Param.getSQUARE_SIZE());
-		this.rectangle = new Rectangle(xGrid*Param.getSQUARE_SIZE(),yGrid*Param.getSQUARE_SIZE(),Param.getSQUARE_SIZE(),Param.getSQUARE_SIZE());
+		this.canPutRectangle = new Rectangle(xGrid*squareSize,yGrid*squareSize,squareSize,squareSize);
+		this.rectangle = new Rectangle(xGrid*squareSize,yGrid*squareSize,squareSize,squareSize);
 
 		//背景色、サイズ、グリッド線、透明度
-		this.rectangle.setFill(Param.getSQUARE_COLOR());
-		this.rectangle.setStroke(Param.getSQUARE_LINE_COLOR());
+		this.rectangle.setFill(squareColor);
+		this.rectangle.setStroke(squareLineColor);
 
-		this.canPutRectangle.setFill(Param.getCANPUT_SQUARE_COLOR());
-		this.canPutRectangle.setOpacity(Param.getCANNOTPUT_OPOCITY());
+		this.canPutRectangle.setFill(canPutSquareColor);
+		this.canPutRectangle.setOpacity(canNotPutOpocity);
 		this.reversePieceList = new ArrayList<ArrayList<Integer>>();
 
 		this.getCanPutRectangle().setOnMouseEntered(this::mouseEntered);
@@ -35,9 +44,18 @@ public class Square {
 
 	//ピースありコンストラクタ
 	//規定値用のコンストラクタ
-	public Square(int xGrid,int yGrid,PieceColor pieceColor) {
-		this(xGrid,yGrid);
-		this.piece = new Piece(pieceColor,xGrid,yGrid);
+	public Square(
+			int xGrid,
+			int yGrid,
+			PieceColor pieceColor,
+			double squareSize,
+			Color squareColor,
+			Color squareLineColor,
+			Color canPutSquareColor,
+			double canNotPutOpocity
+			)  {
+		this(xGrid,yGrid,squareSize,squareColor,squareLineColor,canPutSquareColor,canNotPutOpocity);
+		this.piece = new Piece(pieceColor,xGrid,yGrid,squareSize);
 	}
 
 	//裏返し処理

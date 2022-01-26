@@ -28,10 +28,10 @@ public class Param {
 	private static double CANNOTPUT_OPOCITY = 0;
 	//初期配置ピース
 	private static ArrayList<Square> DEFAULT_SQUARE = new ArrayList<Square>(Arrays.asList(
-			new Square(3,3,PieceColor.white),
-			new Square(3,4,PieceColor.black),
-			new Square(4,3,PieceColor.black),
-			new Square(4,4,PieceColor.white)));
+			new Square(3,3,PieceColor.white,Param.getSQUARE_SIZE(),Param.getSQUARE_COLOR(),Param.getSQUARE_LINE_COLOR(),Param.getCANPUT_SQUARE_COLOR(),Param.getCANNOTPUT_OPOCITY()),
+			new Square(3,4,PieceColor.black,Param.getSQUARE_SIZE(),Param.getSQUARE_COLOR(),Param.getSQUARE_LINE_COLOR(),Param.getCANPUT_SQUARE_COLOR(),Param.getCANNOTPUT_OPOCITY()),
+			new Square(4,3,PieceColor.black,Param.getSQUARE_SIZE(),Param.getSQUARE_COLOR(),Param.getSQUARE_LINE_COLOR(),Param.getCANPUT_SQUARE_COLOR(),Param.getCANNOTPUT_OPOCITY()),
+			new Square(4,4,PieceColor.white,Param.getSQUARE_SIZE(),Param.getSQUARE_COLOR(),Param.getSQUARE_LINE_COLOR(),Param.getCANPUT_SQUARE_COLOR(),Param.getCANNOTPUT_OPOCITY())));
 	//白ピース色
 	private static Color PIECE_WHITE_COLOR = Color.WHITE;
 	//黒ピース色
@@ -58,14 +58,14 @@ public class Param {
 
 	//スペシャル
 	private static ArrayList<SpecialAttribute> SPECIAL_LIST = new ArrayList<SpecialAttribute>(Arrays.asList(
-			new SpecialAttribute(1,Special.Miss),
-			new SpecialAttribute(2,Special.Random_ban),
-			new SpecialAttribute(3,Special.Random_change),
-			new SpecialAttribute(4,Special.Random_break),
-			new SpecialAttribute(5,Special.Horizontal_divide),
-			new SpecialAttribute(6,Special.Vertical_divide),
-			new SpecialAttribute(7,Special.Meteor),
-			new SpecialAttribute(8,Special.Cross_divide)
+			new SpecialAttribute(1,Special.Miss,50,false,false),
+			new SpecialAttribute(2,Special.Random_ban,65,false,false),
+			new SpecialAttribute(3,Special.Random_change,75,false,false),
+			new SpecialAttribute(4,Special.Random_break,85,false,false),
+			new SpecialAttribute(5,Special.Meteor,88,false,false),
+			new SpecialAttribute(6,Special.Horizontal_divide,93,true,false),
+			new SpecialAttribute(7,Special.Vertical_divide,98,false,true),
+			new SpecialAttribute(8,Special.Cross_divide,100,true,true)
 			));
 	//ランダム表のパネルサイズ
 	private static double RANDOM_GRIDPANE_WIDTH = 100;
@@ -74,7 +74,7 @@ public class Param {
 	//gridPaneの文字パディング
 	private static double GRIDPANE_TEXT_PADDING = 5;
 	//通常textフォントサイズ
-	private static double NORMAL_FOMT_SIZE = 15;
+	private static double NORMAL_FONT_SIZE = 15;
 	//強調textフォントサイズ
 	private static double BOLD_FONT_SIZE = 20;
 
@@ -156,8 +156,8 @@ public class Param {
 	public static double getGRIDPANE_TEXT_PADDING() {
 		return GRIDPANE_TEXT_PADDING;
 	}
-	public static double getNORMAL_FOMT_SIZE() {
-		return NORMAL_FOMT_SIZE;
+	public static double getNORMAL_FONT_SIZE() {
+		return NORMAL_FONT_SIZE;
 	}
 	public static double getBOLD_FONT_SIZE() {
 		return BOLD_FONT_SIZE;

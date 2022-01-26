@@ -30,15 +30,49 @@ public class Reversi extends Group{
 		this.board = new ArrayList<ArrayList<Square>>();
 		this.reversiPane = new Pane();
 		this.setReversiPaneConfig();
-		this.turnPlayer = new TurnPlayer(Param.getPRECEDING_COLOR());
-		this.Score = new Score();
-		this.specialPane = new SpecialPane();
+		this.turnPlayer = new TurnPlayer(
+				Param.getPRECEDING_COLOR(),
+				Param.getSQUARE_SIZE(),
+				Param.getGRID_SIZE(),
+				Param.getREVERSI_PANE_PADDING(),
+				Param.getTURNPLAYER_PANE_WIDTH(),
+				Param.getTURNPLAYER_PANE_HEIGHT(),
+				Param.getGRIDPANE_TEXT_PADDING(),
+				Param.getTURNPLAYER_LABEL(),
+				Param.getNORMAL_FONT_SIZE());
+		this.Score = new Score(
+				Param.getSCORE_PANE_HEIGHT(),
+				Param.getSCORE_PANE_WIDTH(),
+				Param.getSQUARE_SIZE(),
+				Param.getGRID_SIZE(),
+				Param.getREVERSI_PANE_PADDING(),
+				Param.getDIVIDE_SIZE(),
+				Param.getTURNPLAYER_PANE_HEIGHT(),
+				Param.getNORMAL_FONT_SIZE(),
+				Param.getBOLD_FONT_SIZE());
+		this.specialPane = new SpecialPane(
+				Param.getSPECIAL_LIST(),
+				Param.getNORMAL_FONT_SIZE(),
+				Param.getRANDOM_GRIDPANE_WIDTH(),
+				Param.getGRIDPANE_TEXT_PADDING(),
+				Param.getBOLD_FONT_SIZE(),
+				Param.getRANDOM_TEXTPANE_WIDTH(),
+				Param.getSQUARE_SIZE(),
+				Param.getGRID_SIZE(),
+				Param.getREVERSI_PANE_PADDING());
 
 		//マス目作成処理
 		for(int i=0;i<Param.getGRID_SIZE();i++) {
 			this.board.add(new ArrayList<Square>());
 			for(int j=0;j<Param.getGRID_SIZE();j++) {
-				this.board.get(i).add(new Square(i,j));
+				this.board.get(i).add(new Square(
+						i,
+						j,
+						Param.getSQUARE_SIZE(),
+						Param.getSQUARE_COLOR(),
+						Param.getSQUARE_LINE_COLOR(),
+						Param.getCANPUT_SQUARE_COLOR(),
+						Param.getCANNOTPUT_OPOCITY()));
 			}
 		}
 		//クリックイベント付与
@@ -75,7 +109,7 @@ public class Reversi extends Group{
 	//ピース配置処理
 	public void putPiece(PieceColor player,int xGrid,int yGrid) {
 		//配置処理
-		this.board.get(xGrid).get(yGrid).setPiece(new Piece(player,xGrid,yGrid));
+		this.board.get(xGrid).get(yGrid).setPiece(new Piece(player,xGrid,yGrid,Param.getSQUARE_SIZE()));
 		this.reversiPane.getChildren().add(this.board.get(xGrid).get(yGrid).getPiece().getCircle());
 
 		//裏返し処理
@@ -230,17 +264,21 @@ public class Reversi extends Group{
 			//置き場所ない場合
 			if(!this.isCanPutPieceExist()) this.skip();
 		}
-		//this.testPrint();
+		this.testPrint();
 	}
 
 	//test用
 	public void testPrint() {
 		System.out.println("test");
+		this.specialPane.rouletteSpecial(Param.getSPECIAL_LIST());
+		/*
 		for(ArrayList<Square> list:this.board) {
 			for(Square s:list) {
 				if(s.isCanPutPiece())System.out.println("x:" + s.getxGrid() + " y:" + s.getyGrid() + " flg:"+ s.isCanPutPiece() + " list:" + s.getReversePieceList());
 			}
 		}
+		*/
+
 	}
 
 	//skip処理
@@ -277,7 +315,7 @@ public class Reversi extends Group{
 				else if(s.getPiece().getPieceColor().equals(PieceColor.black)) blackPieces++;
 			}
 		}
-		this.Score.setScore(whitePieces, blackPieces);
+		this.Score.setScore(whitePieces, blackPieces,Param.getWINNER_LABEL());
 	}
 
 

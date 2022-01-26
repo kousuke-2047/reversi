@@ -12,25 +12,35 @@ public class TurnPlayer {
 	private GridPane turnPlayerPane;
 	private Text labelText;
 
-	public TurnPlayer(PieceColor pieceColor) {
+	public TurnPlayer(
+			PieceColor pieceColor,
+			double squareSize,
+			double gridSize,
+			double reversiPanePadding,
+			double turnPlayerPaneWidth,
+			double turnPlayerPaneHeight,
+			double gridPaneTextPadding,
+			String turnPlayerLabel,
+			double normalFontSize
+			) {
 		this.turnPlayerPane = new GridPane();
 		this.turnPlayer = pieceColor;
 		this.turnPlayerText = new Text(pieceColor.toString());
 		this.labelText = new Text();
 
 		//座標調整
-		this.turnPlayerPane.setLayoutX( (Param.getSQUARE_SIZE()*Param.getGRID_SIZE()) + Param.getREVERSI_PANE_PADDING() + Param.getDIVIDE_SIZE());
-		this.turnPlayerPane.setLayoutY(Param.getREVERSI_PANE_PADDING());
-		this.turnPlayerPane.setPrefWidth(Param.getTURNPLAYER_PANE_WIDTH());
-		this.turnPlayerPane.setPrefHeight(Param.getTURNPLAYER_PANE_HEIGHT());
+		this.turnPlayerPane.setLayoutX( (squareSize*gridSize) + reversiPanePadding + Param.getDIVIDE_SIZE());
+		this.turnPlayerPane.setLayoutY(reversiPanePadding);
+		this.turnPlayerPane.setPrefWidth(turnPlayerPaneWidth);
+		this.turnPlayerPane.setPrefHeight(turnPlayerPaneHeight);
 
-		this.turnPlayerPane.setVgap(Param.getGRIDPANE_TEXT_PADDING());
-		this.turnPlayerPane.setHgap(Param.getGRIDPANE_TEXT_PADDING());
+		this.turnPlayerPane.setVgap(gridPaneTextPadding);
+		this.turnPlayerPane.setHgap(gridPaneTextPadding);
 
-		this.labelText.setText(Param.getTURNPLAYER_LABEL());
+		this.labelText.setText(turnPlayerLabel);
 
-		this.labelText.setFont(Font.font(Param.getNORMAL_FOMT_SIZE()));
-		this.turnPlayerText.setFont(Font.font(Param.getNORMAL_FOMT_SIZE()));
+		this.labelText.setFont(Font.font(normalFontSize));
+		this.turnPlayerText.setFont(Font.font(normalFontSize));
 
 		this.turnPlayerPane.add(labelText,0,0);
 		this.turnPlayerPane.add(turnPlayerText,1,0);

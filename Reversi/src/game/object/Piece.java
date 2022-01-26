@@ -1,7 +1,6 @@
 package game.object;
 
 import game.enums.PieceColor;
-import game.param.Param;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -9,12 +8,12 @@ public class Piece {
 	private PieceColor pieceColor;
 	private Circle circle;
 
-	public Piece(PieceColor pieceColor,int xGrid,int yGrid) {
+	public Piece(PieceColor pieceColor,int xGrid,int yGrid,double squareSize) {
 		this.pieceColor = pieceColor;
 		if(pieceColor == PieceColor.black) {
-			this.circle = new Circle(Param.getSQUARE_SIZE()*xGrid+Param.getSQUARE_SIZE()/2,Param.getSQUARE_SIZE()*yGrid+Param.getSQUARE_SIZE()/2,Param.getSQUARE_SIZE()/2,Color.BLACK);
+			this.circle = new Circle(squareSize*xGrid+squareSize/2,squareSize*yGrid+squareSize/2,squareSize/2,Color.BLACK);
 		}else if(pieceColor == PieceColor.white){
-			this.circle = new Circle(Param.getSQUARE_SIZE()*xGrid+Param.getSQUARE_SIZE()/2,Param.getSQUARE_SIZE()*yGrid+Param.getSQUARE_SIZE()/2,Param.getSQUARE_SIZE()/2,Color.WHITE);
+			this.circle = new Circle(squareSize*xGrid+squareSize/2,squareSize*yGrid+squareSize/2,squareSize/2,Color.WHITE);
 		}
 	}
 

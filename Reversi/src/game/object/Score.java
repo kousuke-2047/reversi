@@ -2,56 +2,60 @@ package game.object;
 
 import game.enums.PieceColor;
 import game.param.Param;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class Score {
 	private int whitePieces;
 	private int blackPieces;
 	private Pane scorePane;
-	private TextField whiteScore;
-	private TextField blackScore;
+	private Text whiteScore;
+	private Text blackScore;
 	private Pane whitePane;
 	private Pane blackPane;
 	private Pane winnerPane;
-	private TextField winnerText;
+	private Text winnerText;
 
-	public Score() {
+	public Score(
+			double scorePaneHeight,
+			double scorePaneWidth,
+			double squareSize,
+			double gridSize,
+			double reversiPanePadding,
+			double divideSize,
+			double turnPlayerPaneHeight,
+			double normalFontSize,
+			double boldFontSize
+			) {
 		this.scorePane = new Pane();
 		this.whitePane = new Pane();
 		this.blackPane = new Pane();
-		this.whiteScore = new TextField();
-		this.blackScore = new TextField();
+		this.whiteScore = new Text();
+		this.blackScore = new Text();
 		this.winnerPane = new Pane();
-		this.winnerText = new TextField();
+		this.winnerText = new Text();
 
-		this.scorePane.setPrefHeight(Param.getSCORE_PANE_HEIGHT()*2);
-		this.scorePane.setPrefWidth(Param.getSCORE_PANE_WIDTH()*2);
-		this.whitePane.setPrefHeight(Param.getSCORE_PANE_HEIGHT());
-		this.whitePane.setPrefWidth(Param.getSCORE_PANE_WIDTH());
-		this.blackPane.setPrefHeight(Param.getSCORE_PANE_HEIGHT());
-		this.blackPane.setPrefWidth(Param.getSCORE_PANE_WIDTH());
-		this.whiteScore.setPrefHeight(Param.getSCORE_PANE_HEIGHT());
-		this.whiteScore.setPrefWidth(Param.getSCORE_PANE_WIDTH());
-		this.blackScore.setPrefHeight(Param.getSCORE_PANE_HEIGHT());
-		this.blackScore.setPrefWidth(Param.getSCORE_PANE_WIDTH());
-		this.winnerPane.setPrefHeight(Param.getSCORE_PANE_HEIGHT());
-		this.winnerPane.setPrefWidth(Param.getSCORE_PANE_WIDTH()*2);
-		this.winnerText.setPrefHeight(Param.getSCORE_PANE_HEIGHT());
-		this.winnerText.setPrefWidth(Param.getSCORE_PANE_WIDTH()*2);
+		//各パネル大きさ設定
+		this.scorePane.setPrefHeight(scorePaneHeight*2);
+		this.scorePane.setPrefWidth(scorePaneWidth*2);
+		this.whitePane.setPrefHeight(scorePaneHeight);
+		this.whitePane.setPrefWidth(scorePaneWidth);
+		this.blackPane.setPrefHeight(scorePaneHeight);
+		this.blackPane.setPrefWidth(scorePaneWidth);
+		this.winnerPane.setPrefHeight(scorePaneHeight);
+		this.winnerPane.setPrefWidth(scorePaneWidth*2);
 
-		this.blackPane.setLayoutX(Param.getSCORE_PANE_WIDTH());
-		this.winnerPane.setLayoutY(Param.getSCORE_PANE_HEIGHT());
+		this.blackPane.setLayoutX(scorePaneWidth);
+		this.winnerPane.setLayoutY(scorePaneHeight);
 
 		//X座標調整
-		this.scorePane.setLayoutX( (Param.getSQUARE_SIZE()*Param.getGRID_SIZE()) + Param.getREVERSI_PANE_PADDING() + Param.getDIVIDE_SIZE() );
+		this.scorePane.setLayoutX( (squareSize*gridSize) + reversiPanePadding + divideSize );
 		this.scorePane.setLayoutY(Param.getTURNPLAYER_PANE_HEIGHT());
 
-		this.whiteScore.setEditable(false);
-		this.blackScore.setEditable(false);
-		this.winnerText.setEditable(false);
-		//位置調整
-		//this.scorePane.setLayoutY(value);
+		this.whiteScore.setFont(Font.font(normalFontSize));
+		this.blackScore.setFont(Font.font(normalFontSize));
+		this.winnerText.setFont(Font.font(boldFontSize));
 
 		this.whitePane.getChildren().add(this.whiteScore);
 		this.blackPane.getChildren().add(this.blackScore);
@@ -63,17 +67,17 @@ public class Score {
 	}
 
 	//スコア表示
-	public void setScore(int whitePieces,int blackPieces) {
+	public void setScore(int whitePieces,int blackPieces,String winnerLabel) {
 		this.setWhitePieces(whitePieces);
 		this.setBlackPieces(blackPieces);
-		this.setWinner();
+		this.setWinner(winnerLabel);
 	}
 	//結果表示
-	private void setWinner() {
+	private void setWinner(String winnerLabel) {
 		if(this.whitePieces > this.blackPieces) {
-			this.winnerText.setText(Param.getWINNER_LABEL() + PieceColor.white.toString());
+			this.winnerText.setText(winnerLabel + PieceColor.white.toString());
 		}else if(this.blackPieces > this.whitePieces) {
-			this.winnerText.setText(Param.getWINNER_LABEL() + PieceColor.black.toString());
+			this.winnerText.setText(winnerLabel + PieceColor.black.toString());
 		}else{
 			this.winnerText.setText(Param.getDRAW_LABEL());
 		}
@@ -99,16 +103,16 @@ public class Score {
 	public void setScorePane(Pane scorePane) {
 		this.scorePane = scorePane;
 	}
-	public TextField getWhiteScore() {
+	public Text getWhiteScore() {
 		return whiteScore;
 	}
-	public void setWhiteScore(TextField whiteScore) {
+	public void setWhiteScore(Text whiteScore) {
 		this.whiteScore = whiteScore;
 	}
-	public TextField getBlackScore() {
+	public Text getBlackScore() {
 		return blackScore;
 	}
-	public void setBlackScore(TextField blackScore) {
+	public void setBlackScore(Text blackScore) {
 		this.blackScore = blackScore;
 	}
 	public Pane getWhitePane() {
@@ -123,10 +127,10 @@ public class Score {
 	public void setBlackPane(Pane blackPane) {
 		this.blackPane = blackPane;
 	}
-	public TextField getWinnerText() {
+	public Text getWinnerText() {
 		return winnerText;
 	}
-	public void setWinnerText(TextField winnerText) {
+	public void setWinnerText(Text winnerText) {
 		this.winnerText = winnerText;
 	}
 	public Pane getWinnerPane() {
