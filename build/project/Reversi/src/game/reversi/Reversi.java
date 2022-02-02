@@ -2,10 +2,8 @@ package game.reversi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 import game.enums.PieceColor;
-import game.enums.Special;
 import game.object.Piece;
 import game.object.Score;
 import game.object.SpecialPane;
@@ -26,8 +24,6 @@ public class Reversi extends Group{
 	private TurnPlayer turnPlayer;
 	private Score Score;
 	private SpecialPane specialPane;
-	private int specialSpan;
-	private int specialSpanCount = 0;
 
 
 	public Reversi() {
@@ -64,7 +60,6 @@ public class Reversi extends Group{
 				Param.getSQUARE_SIZE(),
 				Param.getGRID_SIZE(),
 				Param.getREVERSI_PANE_PADDING());
-		this.specialSpan = Param.getSPECIAL_SPAN();
 
 		//マス目作成処理
 		for(int i=0;i<Param.getGRID_SIZE();i++) {
@@ -77,8 +72,7 @@ public class Reversi extends Group{
 						Param.getSQUARE_COLOR(),
 						Param.getSQUARE_LINE_COLOR(),
 						Param.getCANPUT_SQUARE_COLOR(),
-						Param.getCANNOTPUT_OPOCITY(),
-						0,Param.getGRID_SIZE(),0,Param.getGRID_SIZE()));
+						Param.getCANNOTPUT_OPOCITY()));
 			}
 		}
 		//クリックイベント付与
@@ -157,39 +151,39 @@ public class Reversi extends Group{
 	//ピース配置チェック
 	private boolean checkPutPiece(Square square) {
 		boolean check = false;
-		//ピースアリまたはbanされている
-		if(!square.checkCanPutPiece()) return check;
-		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(), 0,  1,square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid())) {
+		//ピースアリ
+		if(square.getPiece() != null) return check;
+		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(), 0,  1)) {
 			check = true;
-			addReversePieceList(square.getxGrid(), square.getyGrid(), 0,  1,square.getxGrid(), square.getyGrid(),square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid());
+			addReversePieceList(square.getxGrid(), square.getyGrid(), 0,  1,square.getxGrid(), square.getyGrid());
 		}
-		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(), 0, -1,square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid())) {
+		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(), 0, -1)) {
 			check = true;
-			addReversePieceList(square.getxGrid(), square.getyGrid(), 0, -1,square.getxGrid(), square.getyGrid(),square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid());
+			addReversePieceList(square.getxGrid(), square.getyGrid(), 0, -1,square.getxGrid(), square.getyGrid());
 		}
-		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(), 1,  0,square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid())) {
+		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(), 1,  0)) {
 			check = true;
-			addReversePieceList(square.getxGrid(), square.getyGrid(), 1,  0,square.getxGrid(), square.getyGrid(),square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid());
+			addReversePieceList(square.getxGrid(), square.getyGrid(), 1,  0,square.getxGrid(), square.getyGrid());
 		}
-		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(),-1,  0,square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid())) {
+		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(),-1,  0)) {
 			check = true;
-			addReversePieceList(square.getxGrid(), square.getyGrid(),-1,  0,square.getxGrid(), square.getyGrid(),square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid());
+			addReversePieceList(square.getxGrid(), square.getyGrid(),-1,  0,square.getxGrid(), square.getyGrid());
 		}
-		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(), 1,  1,square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid())) {
+		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(), 1,  1)) {
 			check = true;
-			addReversePieceList(square.getxGrid(), square.getyGrid(), 1,  1,square.getxGrid(), square.getyGrid(),square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid());
+			addReversePieceList(square.getxGrid(), square.getyGrid(), 1,  1,square.getxGrid(), square.getyGrid());
 		}
-		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(), 1, -1,square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid())) {
+		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(), 1, -1)) {
 			check = true;
-			addReversePieceList(square.getxGrid(), square.getyGrid(), 1, -1,square.getxGrid(), square.getyGrid(),square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid());
+			addReversePieceList(square.getxGrid(), square.getyGrid(), 1, -1,square.getxGrid(), square.getyGrid());
 		}
-		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(),-1,  1,square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid())) {
+		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(),-1,  1)) {
 			check = true;
-			addReversePieceList(square.getxGrid(), square.getyGrid(),-1,  1,square.getxGrid(), square.getyGrid(),square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid());
+			addReversePieceList(square.getxGrid(), square.getyGrid(),-1,  1,square.getxGrid(), square.getyGrid());
 		}
-		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(),-1, -1,square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid())) {
+		if(this.checkFirstPiece(square.getxGrid(), square.getyGrid(),-1, -1)) {
 			check = true;
-			addReversePieceList(square.getxGrid(), square.getyGrid(),-1, -1,square.getxGrid(), square.getyGrid(),square.getMinXGrid(),square.getMaxXGrid(),square.getMinYGrid(),square.getMaxYGrid());
+			addReversePieceList(square.getxGrid(), square.getyGrid(),-1, -1,square.getxGrid(), square.getyGrid());
 		}
 		return check;
 	}
@@ -197,10 +191,9 @@ public class Reversi extends Group{
 
 
 	//ピース配置の最初のチェック
-	private boolean checkFirstPiece(int xGrid,int yGrid,int xAdd,int yAdd,
-			int minXGrid,int maxXGrid,int minYGrid,int maxYGrid) {
+	private boolean checkFirstPiece(int xGrid,int yGrid,int xAdd,int yAdd) {
 		//枠外
-		if(this.checkOutOfBoard((xGrid+xAdd), (yGrid+yAdd),minXGrid,maxXGrid,minYGrid,maxYGrid)) {
+		if(this.checkOutOfBoard((xGrid+xAdd), (yGrid+yAdd))) {
 			return false;
 		//隣のピースが無し
 		}else if(this.isNextPieceNull((xGrid+xAdd),(yGrid+yAdd))) {
@@ -210,19 +203,18 @@ public class Reversi extends Group{
 			return false;
 		}
 		//隣のピースが敵
-		return this.checkOtherPiece((xGrid+xAdd),(yGrid+yAdd),xAdd,yAdd,minXGrid,maxXGrid,minYGrid,maxYGrid);
+		return this.checkOtherPiece((xGrid+xAdd),(yGrid+yAdd),xAdd,yAdd);
 	}
 	//ピース配置の2番目以降のチェック
-	private boolean checkOtherPiece(int xGrid,int yGrid,int xAdd,int yAdd,
-			int minXGrid,int maxXGrid,int minYGrid,int maxYGrid) {
-		if(this.checkOutOfBoard((xGrid+xAdd), (yGrid+yAdd),minXGrid,maxXGrid,minYGrid,maxYGrid)) {
+	private boolean checkOtherPiece(int xGrid,int yGrid,int xAdd,int yAdd) {
+		if(this.checkOutOfBoard((xGrid+xAdd), (yGrid+yAdd))) {
 			return false;
 		//隣のピース無し
 		}else if(this.isNextPieceNull((xGrid+xAdd),(yGrid+yAdd))) {
 			return false;
 		//隣のピースが敵
 		}else if(!this.isNextPieceTurnColor((xGrid+xAdd),(yGrid+yAdd))) {
-			return this.checkOtherPiece((xGrid+xAdd), (yGrid+yAdd), xAdd, yAdd,minXGrid,maxXGrid,minYGrid,maxYGrid);
+			return this.checkOtherPiece((xGrid+xAdd), (yGrid+yAdd), xAdd, yAdd);
 		//隣のピースが味方
 		}else{
 			return true;
@@ -230,10 +222,9 @@ public class Reversi extends Group{
 	}
 
 	//リバースリストを作成
-	private void addReversePieceList(int xGrid,int yGrid,int xAdd,int yAdd,int orgXGrid,int orgYGrid,
-			int minXGrid,int maxXGrid,int minYGrid,int maxYGrid) {
+	private void addReversePieceList(int xGrid,int yGrid,int xAdd,int yAdd,int orgXGrid,int orgYGrid) {
 		//盤面外
-		if(this.checkOutOfBoard((xGrid+xAdd), (yGrid+yAdd),minXGrid,maxXGrid,minYGrid,maxYGrid) ) {
+		if(this.checkOutOfBoard((xGrid+xAdd), (yGrid+yAdd)) ) {
 
 		//隣のピース無し
 		}else if(this.isNextPieceNull((xGrid+xAdd), (yGrid+yAdd))) {
@@ -242,14 +233,13 @@ public class Reversi extends Group{
 		}else if(!this.isNextPieceTurnColor((xGrid+xAdd),(yGrid+yAdd))) {
 			//リバースリストに追加
 			this.board.get(orgXGrid).get(orgYGrid).getReversePieceList().add(new ArrayList<Integer>(Arrays.asList((xGrid+xAdd),(yGrid+yAdd))));
-			this.addReversePieceList(xGrid+xAdd, yGrid+yAdd, xAdd, yAdd, orgXGrid, orgYGrid,minXGrid,maxXGrid,minYGrid,maxYGrid);
+			this.addReversePieceList(xGrid+xAdd, yGrid+yAdd, xAdd, yAdd, orgXGrid, orgYGrid);
 		}
 	}
 
 	//盤面外かチェック
-	//★最大値と最小値に変える
-	private boolean checkOutOfBoard(int xGridAdd,int yGridAdd,int minXGrid,int maxXGrid,int minYGrid,int maxYGrid) {
-		return (xGridAdd<minXGrid) || (yGridAdd<minYGrid) || (xGridAdd>=maxXGrid) || (yGridAdd>=maxYGrid);
+	private boolean checkOutOfBoard(int xGridAdd,int yGridAdd) {
+		return (xGridAdd<0) || (yGridAdd<0) || (xGridAdd>=Param.getGRID_SIZE()) || (yGridAdd>=Param.getGRID_SIZE());
 	}
 
 	//次のピース無しチェック
@@ -268,13 +258,6 @@ public class Reversi extends Group{
 	public void mouseClicked(MouseEvent e) {
 		if(this.board.get(selectXGrid).get(selectYGrid).isCanPutPiece()) {
 			this.putPiece(this.getTurnPlayer().getTurnPlayer(),selectXGrid, selectYGrid);
-
-			//ランダムイベント記載
-			if(this.specialSpanCount >= this.specialSpan) {
-				//ランダムイベント実行
-				this.specialSpanCount = 0;
-			}
-
 			this.resetBoard();
 			this.turnPlayer.changePlayer();
 			this.setCanPutPieceOnBoard();
@@ -287,7 +270,7 @@ public class Reversi extends Group{
 	//test用
 	public void testPrint() {
 		System.out.println("test");
-		//this.specialPane.rouletteSpecial(Param.getSPECIAL_LIST(),Param.getDEFAULT_SPECIAL());
+		this.specialPane.rouletteSpecial(Param.getSPECIAL_LIST());
 		/*
 		for(ArrayList<Square> list:this.board) {
 			for(Square s:list) {
@@ -335,99 +318,6 @@ public class Reversi extends Group{
 		this.Score.setScore(whitePieces, blackPieces,Param.getWINNER_LABEL());
 	}
 
-	//ランダムイベント処理
-	private void specialEvent(Special special) {
-		if(special == Special.Miss) this.specialEventMiss();
-		else if(special == Special.Random_ban) this.specialEventRandomBan();
-		else if(special == Special.Random_change) this.specialEventRandomChange();
-		else if(special == Special.Random_break) this.specialEventRandomBreak();
-		else if(special == Special.Meteor) this.specialEventMeteor();
-		else if(special == Special.Horizontal_divide) this.specialEventHorizontalDivide();
-		else if(special == Special.Vertical_divide) this.specialEventVerticalDivide();
-		else if(special == Special.Cross_divide) this.specialEventCrossDivide();
-	}
-	private void specialEventMiss() {
-
-	}
-	private void specialEventRandomBan() {
-		Square target = this.getRandomSquare(null);
-		if(target.checkCanPutPiece()) {
-			target.setBanPutPiece(true);
-		}else {
-			this.specialEventRandomBan();
-		}
-	}
-	private void specialEventRandomChange() {
-		this.getRandomSquare(PieceColor.white).reversePiece();
-		this.getRandomSquare(PieceColor.black).reversePiece();
-	}
-	private void specialEventRandomBreak() {
-		Random r = new Random();
-		int randomInt = r.nextInt(2);
-		if(randomInt == 0) this.getRandomSquare(PieceColor.white).setPiece(null);
-		else if(randomInt == 1) this.getRandomSquare(PieceColor.black).setPiece(null);
-
-	}
-	private void specialEventMeteor() {
-		for(int i=0;i<4;i++) {
-			this.specialEventRandomBreak();
-		}
-	}
-	//水平割り
-	private void specialEventHorizontalDivide() {
-		Random r = new Random();
-		//1-7の間
-		int divideTarget = r.nextInt(Param.getGRID_SIZE()-1) + 1;
-		//一つ前の列を対象に探索限界値を設定する。（最大値）
-		for(Square s:this.board.get(divideTarget-1)) {
-			s.setMaxYGrid(s.getyGrid());
-		}
-		//対象列に探索限界値を設定する。（最小値）
-		for(Square s:this.board.get(divideTarget)) {
-			s.setMinYGrid(s.getyGrid());
-		}
-
-	}
-	//垂直割り
-	//水平割りのY軸バージョン
-	private void specialEventVerticalDivide() {
-		Random r = new Random();
-		int divideTarget = r.nextInt(Param.getGRID_SIZE()-1) + 1;
-		for(ArrayList<Square> sList:this.board) {
-			sList.get(divideTarget-1).setMaxXGrid(sList.get(divideTarget-1).getxGrid());
-		}
-		for(ArrayList<Square> sList:this.board) {
-			sList.get(divideTarget).setMinXGrid(sList.get(divideTarget).getxGrid());
-		}
-	}
-	private void specialEventCrossDivide() {
-		this.specialEventHorizontalDivide();
-		this.specialEventVerticalDivide();
-	}
-
-
-
-	//ランダムマス取得(ピースカラー指定)
-	//nullの場合は無いやつを取得。
-	private Square getRandomSquare(PieceColor targetPiece) {
-		Random r =new Random();
-		int randomXGrid = r.nextInt(this.board.size());
-		int randomYGrid = r.nextInt(this.board.size());
-		//nullチェック
-		if( this.board.get(randomXGrid).get(randomYGrid).getPiece() == null) {
-			if(targetPiece == null) return this.board.get(randomXGrid).get(randomYGrid);
-			else return getRandomSquare(targetPiece);
-		}
-		if( this.board.get(randomXGrid).get(randomYGrid).getPiece().getPieceColor() == targetPiece ) {
-			return this.board.get(randomXGrid).get(randomYGrid);
-		}else {
-			return getRandomSquare(targetPiece);
-		}
-	}
-
-
-
-
 
 
 	public TurnPlayer getTurnPlayer() {
@@ -472,5 +362,4 @@ public class Reversi extends Group{
 	public void setSpecialPane(SpecialPane specialPane) {
 		this.specialPane = specialPane;
 	}
-
 }

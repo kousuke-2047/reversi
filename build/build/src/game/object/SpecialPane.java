@@ -88,7 +88,7 @@ public class SpecialPane {
 	}
 
 	//数値ルーレット
-	public void rouletteSpecial(ArrayList<SpecialAttribute> specialList,SpecialAttribute defaultSpecial) {
+	public void rouletteSpecial(ArrayList<SpecialAttribute> specialList) {
 		Timer t = new Timer();
 		t.scheduleAtFixedRate(new TimerTask() {
 			int count = 0;
@@ -99,44 +99,30 @@ public class SpecialPane {
 				randomText.setText(text);
 				count++;
 				if(count > 100) {
-					//乱数からあらかじめ選択されたスペシャルを実行
-					randomText.setText(String.valueOf(selectSpecial.getId()));
 					blinkingSpecial();
 					t.cancel();
 				}
 			}
 		}, 0, 10);
 	}
-
 	//確率テーブルから決定
-	public void setRandomSpecial(ArrayList<SpecialAttribute> specialList,SpecialAttribute defaultSpecial) {
+	private void setRandomInt(ArrayList<SpecialAttribute> specialList) {
 		Random r = new Random();
 		int randomInt = r.nextInt(100);
-		//乱数テーブルからsが設定されるかのフラグ
-		boolean selectedFlg = false;
 		for(SpecialAttribute s:specialList) {
-			//乱数が設定値以下の場合　かつ
-			//フラグが不要またはまだ指定方向に分かれていない場合
-			if(s.getProbability() > randomInt &&
-					(!s.isNeedHorizontalFlg() || !this.alreadyHorizontalFlg ) &&
-					(!s.isNeedVerticalFlg() || !this.alreadyVerticalFlg)) {
+			/*
+			if(s.getProbability() > randomInt && (!s.isNeedHorizontalFlg() || s. )) {
 				this.selectSpecial = s;
-				if(s.isNeedHorizontalFlg()) this.alreadyHorizontalFlg = s.isNeedHorizontalFlg();
-				if(s.isNeedVerticalFlg())this.alreadyVerticalFlg = s.isNeedVerticalFlg();
-				selectedFlg = true;
 				break;
 			}
+			*/
 		}
-		//テーブル外の場合
-		if(selectedFlg) {
-			this.selectSpecial = defaultSpecial;
-		}
+
 	}
 
 
 
 	//点滅エフェクト
-	//Param追加予定?
 	private void blinkingSpecial() {
 		Timer t = new Timer();
 		t.scheduleAtFixedRate(new TimerTask() {

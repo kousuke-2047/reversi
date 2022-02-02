@@ -28,10 +28,10 @@ public class Param {
 	private static double CANNOTPUT_OPOCITY = 0;
 	//初期配置ピース
 	private static ArrayList<Square> DEFAULT_SQUARE = new ArrayList<Square>(Arrays.asList(
-			new Square(3,3,PieceColor.white,Param.getSQUARE_SIZE(),Param.getSQUARE_COLOR(),Param.getSQUARE_LINE_COLOR(),Param.getCANPUT_SQUARE_COLOR(),Param.getCANNOTPUT_OPOCITY(),0,8,0,8),
-			new Square(3,4,PieceColor.black,Param.getSQUARE_SIZE(),Param.getSQUARE_COLOR(),Param.getSQUARE_LINE_COLOR(),Param.getCANPUT_SQUARE_COLOR(),Param.getCANNOTPUT_OPOCITY(),0,8,0,8),
-			new Square(4,3,PieceColor.black,Param.getSQUARE_SIZE(),Param.getSQUARE_COLOR(),Param.getSQUARE_LINE_COLOR(),Param.getCANPUT_SQUARE_COLOR(),Param.getCANNOTPUT_OPOCITY(),0,8,0,8),
-			new Square(4,4,PieceColor.white,Param.getSQUARE_SIZE(),Param.getSQUARE_COLOR(),Param.getSQUARE_LINE_COLOR(),Param.getCANPUT_SQUARE_COLOR(),Param.getCANNOTPUT_OPOCITY(),0,8,0,8)));
+			new Square(3,3,PieceColor.white,Param.getSQUARE_SIZE(),Param.getSQUARE_COLOR(),Param.getSQUARE_LINE_COLOR(),Param.getCANPUT_SQUARE_COLOR(),Param.getCANNOTPUT_OPOCITY()),
+			new Square(3,4,PieceColor.black,Param.getSQUARE_SIZE(),Param.getSQUARE_COLOR(),Param.getSQUARE_LINE_COLOR(),Param.getCANPUT_SQUARE_COLOR(),Param.getCANNOTPUT_OPOCITY()),
+			new Square(4,3,PieceColor.black,Param.getSQUARE_SIZE(),Param.getSQUARE_COLOR(),Param.getSQUARE_LINE_COLOR(),Param.getCANPUT_SQUARE_COLOR(),Param.getCANNOTPUT_OPOCITY()),
+			new Square(4,4,PieceColor.white,Param.getSQUARE_SIZE(),Param.getSQUARE_COLOR(),Param.getSQUARE_LINE_COLOR(),Param.getCANPUT_SQUARE_COLOR(),Param.getCANNOTPUT_OPOCITY())));
 	//白ピース色
 	private static Color PIECE_WHITE_COLOR = Color.WHITE;
 	//黒ピース色
@@ -56,21 +56,17 @@ public class Param {
 	//turnPlayerパネルラベルテキスト
 	private static String TURNPLAYER_LABEL = "ターン";
 
-	//スペシャル確率表
+	//スペシャル
 	private static ArrayList<SpecialAttribute> SPECIAL_LIST = new ArrayList<SpecialAttribute>(Arrays.asList(
-			new SpecialAttribute(1,Special.Miss,49,false,false),
-			new SpecialAttribute(2,Special.Random_ban,64,false,false),
-			new SpecialAttribute(3,Special.Random_change,74,false,false),
-			new SpecialAttribute(4,Special.Random_break,84,false,false),
-			new SpecialAttribute(5,Special.Meteor,87,false,false),
-			new SpecialAttribute(6,Special.Horizontal_divide,92,true,false),
-			new SpecialAttribute(7,Special.Vertical_divide,97,false,true),
-			new SpecialAttribute(8,Special.Cross_divide,99,true,true)
+			new SpecialAttribute(1,Special.Miss,50,false,false),
+			new SpecialAttribute(2,Special.Random_ban,65,false,false),
+			new SpecialAttribute(3,Special.Random_change,75,false,false),
+			new SpecialAttribute(4,Special.Random_break,85,false,false),
+			new SpecialAttribute(5,Special.Meteor,88,false,false),
+			new SpecialAttribute(6,Special.Horizontal_divide,93,true,false),
+			new SpecialAttribute(7,Special.Vertical_divide,98,false,true),
+			new SpecialAttribute(8,Special.Cross_divide,100,true,true)
 			));
-	//デフォルトスペシャル
-	private static SpecialAttribute DEFAULT_SPECIAL = new SpecialAttribute(1,Special.Miss,50,false,false);
-	//スペシャル発動のターン
-	private static int SPECIAL_SPAN = 2;
 	//ランダム表のパネルサイズ
 	private static double RANDOM_GRIDPANE_WIDTH = 100;
 	//ランダムテキストのパネルサイズ
@@ -165,12 +161,6 @@ public class Param {
 	}
 	public static double getBOLD_FONT_SIZE() {
 		return BOLD_FONT_SIZE;
-	}
-	public static SpecialAttribute getDEFAULT_SPECIAL() {
-		return DEFAULT_SPECIAL;
-	}
-	public static int getSPECIAL_SPAN() {
-		return SPECIAL_SPAN;
 	}
 
 }
